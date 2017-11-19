@@ -23,10 +23,10 @@
                         <form action="{{route('login')}}" method="POST" >
                             {{ csrf_field() }}
                             <div class="wrap_group_input account_input_block">
-                                <input type="text" name="login" value="{{ old('email') }}" class="input_content {{ $errors->has('email') ? ' has-error' : '' }}" placeholder="Логин">
+                                <input type="text" name="login" value="{{ old('login') }}" class="input_content {{ $errors->has('login') ? ' has-error' : '' }}" placeholder="Логин">
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('login') }}</strong>
                                     </span>
                                 @endif
                                 <input type="password" name="password" class="input_content {{ $errors->has('password') ? ' has-error' : '' }}" placeholder="Пароль">
