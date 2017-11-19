@@ -28,19 +28,19 @@ class HomeController extends Controller
             switch($role->translate)
             {
                 case 'superadmin':
-                    return $this->redirectTo(route('products'));
+                    return redirect()->route('products');
                     break;
                 case 'admin':
-                    return $this->redirectTo(route('products'));
+                    return redirect()->route('products');
                     break;
                 case 'moderator':
-                    return $this->redirectTo(route('products'));
+                    return redirect()->route('products');
                     break;
                 case 'member':
-                    return $this->redirectTo(route('orderHistory'));
+                    return redirect()->route('orderHistory');
                     break;
                 default:
-                    return $this->redirectTo(route('asdasd'));
+                    return redirect()->route('mainPage');
                     break;
             }
         }
