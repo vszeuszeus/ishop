@@ -69,4 +69,28 @@ class RegisterController extends Controller
         return $user;
     }
 
+    protected function redirectTo()
+    {
+        foreach(Auth::user()->roles()->get() as $role)
+        {
+            switch($role->translate)
+            {
+                case 'superadmin':
+                    return $this->redirectTo = route('products');
+                    break;
+                case 'admin':
+                    return $this->redirectTo = route('products');
+                    break;
+                case 'moderator':
+                    return $this->redirectTo = route('products');
+                    break;
+                case 'member':
+                    return $this->redirectTo = route('orderHistory');
+                    break;
+                default :
+                    return $this->redirectTo = route('bladavasd');
+            }
+        }
+    }
+
 }
