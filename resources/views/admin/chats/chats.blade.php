@@ -8,12 +8,13 @@
             <div class="row">
 
                 @include('admin.leftMenu')
-
-
                 <div class="col-xs-12 col-md-9 col-lg-10">
 
-                    <div class="titlecontent">Чаты</div>
-
+                    <div class="title_block">
+                        <div class="titlecontent">Чаты</div>
+                        <a href="{{route('createChat')}}" class="btn_type14">Создать чат</a>
+                        <div class="clearfix"></div>
+                    </div>
 
                     <div class="wrap_chat_block">
                         <a href="#" class="chat_block_admin clearfix">
@@ -25,7 +26,11 @@
                                 </div>
                                 <div class="chat_text">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                        laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                                        Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+                                        vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
                                     </p>
                                 </div>
                             </div>
@@ -39,7 +44,11 @@
                                 </div>
                                 <div class="chat_text">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                        laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                                        Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+                                        vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
                                     </p>
                                 </div>
                             </div>
@@ -53,7 +62,11 @@
                                 </div>
                                 <div class="chat_text">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                        laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                                        Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+                                        vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
                                     </p>
                                 </div>
                             </div>
@@ -69,7 +82,11 @@
                                 </div>
                                 <div class="chat_text">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                        laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                                        Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+                                        vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
                                     </p>
                                 </div>
                             </div>
@@ -83,7 +100,11 @@
                                 </div>
                                 <div class="chat_text">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                        laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                                        Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+                                        vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
                                     </p>
                                 </div>
                             </div>
@@ -97,7 +118,11 @@
                                 </div>
                                 <div class="chat_text">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                        laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                                        Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+                                        vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
                                     </p>
                                 </div>
                             </div>
@@ -111,7 +136,11 @@
                                 </div>
                                 <div class="chat_text">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                        laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                                        Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+                                        vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
                                     </p>
                                 </div>
                             </div>
@@ -125,7 +154,11 @@
                                 </div>
                                 <div class="chat_text">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                        laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                                        Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+                                        vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
                                     </p>
                                 </div>
                             </div>
@@ -139,7 +172,11 @@
                                 </div>
                                 <div class="chat_text">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                        laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                                        Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+                                        vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
                                     </p>
                                 </div>
                             </div>
@@ -153,7 +190,11 @@
                                 </div>
                                 <div class="chat_text">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+                                        laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                                        Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+                                        vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
                                     </p>
                                 </div>
                             </div>
@@ -163,10 +204,9 @@
                     </div>
 
 
-
                     <div class="pagination">
                         <div class="count_list">
-                            <div class="label_count">Показывать по: </div>
+                            <div class="label_count">Показывать по:</div>
                             <div class="wrap-select">
                                 <select name="" id="" class="select">
                                     <option value="">10</option>
@@ -194,29 +234,6 @@
                             </li>
                         </ul>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 </div><!--col-md-9-->

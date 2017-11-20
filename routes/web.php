@@ -44,6 +44,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'products'], function(){
             Route::get('/','Admin\CategoryController@index')->name('products');
         });
+        Route::group(['prefix' => 'categories'], function(){
+            Route::get('/create','Admin\CategoryController@create')->name('addCategory');
+        });
         Route::group(['prefix' => 'sales'], function(){
             Route::get('/','Admin\SaleController@index')->name('sales');
         });
@@ -54,21 +57,16 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('/','Admin\SalaryController@index')->name('salaries');
         });
         Route::group(['prefix' => 'options'], function(){
-            Route::get('/','Admin\OptionController@index')->name('options');
-        });
-        Route::group(['prefix' => 'tickets'], function(){
-            Route::get('/','Admin\TicketController@index')->name('tickets');
-        });
-        Route::group(['prefix' => 'notices'], function(){
-            Route::get('/','Admin\NoticeController@index')->name('notices');
-        });
-        Route::group(['prefix' => 'chats'], function(){
             Route::get('/','Admin\ChatController@index')->name('chats');
+            Route::get('create','Admin\ChatController@create')->name('createChat');
+            Route::post('store','Admin\ChatController@store')->name('storeChat');
         });
     });
 });
 
 Auth::routes();
+
+Route::get('administratorLogin', 'Auth\LoginController@adminLoginView');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

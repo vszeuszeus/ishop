@@ -60,5 +60,10 @@ class LoginController extends Controller
         }
     }
 
+    public function adminLoginView()
+    {
+        return view('auth.loginAdmin');
+    }
+
 
 }

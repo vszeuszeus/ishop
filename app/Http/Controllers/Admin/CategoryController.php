@@ -11,4 +11,9 @@ class CategoryController extends Controller
     {
         return view('admin.products.categories');
     }
+
+    public function create()
+    {
+        return view('admin.categories.create');
+    }
 }
