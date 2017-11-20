@@ -56,10 +56,13 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'salaries'], function(){
             Route::get('/','Admin\SalaryController@index')->name('salaries');
         });
-        Route::group(['prefix' => 'options'], function(){
+        Route::group(['prefix' => 'chats'], function(){
             Route::get('/','Admin\ChatController@index')->name('chats');
             Route::get('create','Admin\ChatController@create')->name('createChat');
             Route::post('store','Admin\ChatController@store')->name('storeChat');
+        });
+        Route::group(['prefix' => 'options'], function(){
+            Route::get('/','Admin\OptionController@index')->name('options');
         });
     });
 });
