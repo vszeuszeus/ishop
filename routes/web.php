@@ -56,6 +56,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'salaries'], function(){
             Route::get('/','Admin\SalaryController@index')->name('salaries');
         });
+        Route::group(['prefix' => 'tickets'], function(){
+            Route::get('/','Admin\TicketController@index')->name('tickets');
+        });
         Route::group(['prefix' => 'chats'], function(){
             Route::get('/','Admin\ChatController@index')->name('chats');
             Route::get('create','Admin\ChatController@create')->name('createChat');
