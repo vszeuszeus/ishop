@@ -67,6 +67,9 @@ Route::group(['middleware' => 'auth'], function(){
         Route::group(['prefix' => 'options'], function(){
             Route::get('/','Admin\OptionController@index')->name('options');
         });
+        Route::group(['prefix' => 'notices'], function(){
+            Route::get('/','Admin\NoticeController@index')->name('notices');
+        });
     });
 });
 
