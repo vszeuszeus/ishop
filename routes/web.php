@@ -45,8 +45,15 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('/','Admin\CategoryController@index')->name('products');
         });
         Route::group(['prefix' => 'categories'], function(){
-            Route::get('/create','Admin\CategoryController@create')->name('addCategory');
+            Route::get('/create','Admin\CategoryController@create')->name('category.create');
+            Route::post('/store','Admin\CategoryController@create')->name('category.store');
         });
+
+        Route::group(['prefix' => 'prodcut_groups'], function()
+        {
+            //
+        });
+
         Route::group(['prefix' => 'sales'], function(){
             Route::get('/','Admin\SaleController@index')->name('sales');
         });

@@ -57,7 +57,7 @@
                                     </ul>
                                 </div>
                                 <div class="block_formitem">
-                                    <a href="{{route('addCategory')}}" class="btn_type14">Добавить категорию</a>
+                                    <a href="{{route('category.create')}}" class="btn_type14">Добавить категорию</a>
                                 </div>
                             </div>
                         </div>
