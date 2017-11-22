@@ -24,36 +24,14 @@
 
                                 <div class="block_formitem">
                                     <ul  class="aside_ul">
-                                        <li><a href="#">ICQ</a>
-                                            <div class="hover_td">
-                                                <a href="#" class="icon_td chan"></a><a href="#" class="icon_td delete"></a>
-                                            </div>
-                                        </li>
-                                        <li><a href="#">Telegram</a>
-                                            <div class="hover_td">
-                                                <a href="#" class="icon_td chan"></a><a href="#" class="icon_td delete"></a>
-                                            </div>
-                                        </li>
-                                        <li><a href="#">Skype</a>
-                                            <div class="hover_td">
-                                                <a href="#" class="icon_td chan"></a><a href="#" class="icon_td delete"></a>
-                                            </div>
-                                        </li>
-                                        <li><a href="#">Сим-карты</a>
-                                            <div class="hover_td">
-                                                <a href="#" class="icon_td chan"></a><a href="#" class="icon_td delete"></a>
-                                            </div>
-                                        </li>
-                                        <li><a href="#">Ростов MTS</a>
-                                            <div class="hover_td">
-                                                <a href="#" class="icon_td chan"></a><a href="#" class="icon_td delete"></a>
-                                            </div>
-                                        </li>
-                                        <li><a href="#">Москва мегафон</a>
-                                            <div class="hover_td">
-                                                <a href="#" class="icon_td chan"></a><a href="#" class="icon_td delete"></a>
-                                            </div>
-                                        </li>
+                                        @foreach($categories as $oneCategory)
+                                            <li><a href="{{route('category.show', $oneCategory)}}">{{$oneCategory->name}}</a>
+                                                <div class="hover_td">
+                                                    <a href="{{route('category.edit', $oneCategory)}}" class="icon_td chan"></a><a href="{{route('category.delete', $oneCategory)}}" class="icon_td delete"></a>
+                                                </div>
+                                            </li>
+                                        @endforeach
+
                                     </ul>
                                 </div>
                                 <div class="block_formitem">
@@ -63,7 +41,7 @@
                         </div>
 
                         <div class="col-xs-12 col-md-12 col-lg-9">
-                            <div class="form_label lab_size_block">Категория: ICQ</div>
+                            <div class="form_label lab_size_block">Категория: {{$category->name}}</div>
 
                             <div class="wrap_block_table">
 
@@ -168,12 +146,14 @@
                                 <div class="count_list">
                                     <div class="label_count">Показывать по: </div>
                                     <div class="wrap-select">
-                                        <select name="" id="" class="select">
-                                            <option value="">10</option>
-                                            <option value="">20</option>
-                                            <option value="">30</option>
-                                            <option value="">40</option>
-                                        </select>
+                                        <form method="GET" action="{{route('category.show', $category)}}">
+                                            <select name="pagination" id="" class="select" onchange="submit">
+                                                <option value="">10</option>
+                                                <option value="">20</option>
+                                                <option value="">30</option>
+                                                <option value="">40</option>
+                                            </select>
+                                        </form>
                                     </div>
                                 </div>
                                 <ul class="pagination_ul">

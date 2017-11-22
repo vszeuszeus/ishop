@@ -40,42 +40,54 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('support', 'PA\SupportController@support')->name('supportLc');
     });
 
-    Route::group(['prefix' => 'admin'], function(){
+    Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
+
         Route::group(['prefix' => 'products'], function(){
-            Route::get('/','Admin\CategoryController@index')->name('products');
+            Route::get('/','CategoryController@index')->name('products');
+
         });
         Route::group(['prefix' => 'categories'], function(){
-            Route::get('/create','Admin\CategoryController@create')->name('category.create');
-            Route::post('/store','Admin\CategoryController@create')->name('category.store');
+            Route::get('/{category}/show','CategoryController@show')->name('category.show');
+            Route::get('/create','CategoryController@create')->name('category.create');
+            Route::post('/store','CategoryController@store')->name('category.store');
+            Route::get('{category}/edit','CategoryController@edit')->name('category.edit');
+            Route::patch('{category}/update','CategoryController@update')->name('category.update');
+            Route::get('{category}/delete','CategoryController@delete')->name('category.delete');
         });
 
-        Route::group(['prefix' => 'prodcut_groups'], function()
+        Route::group(['prefix' => 'product_groups'], function()
         {
             //
         });
 
         Route::group(['prefix' => 'sales'], function(){
-            Route::get('/','Admin\SaleController@index')->name('sales');
+            Route::get('/','SaleController@index')->name('sales');
         });
+
         Route::group(['prefix' => 'managers'], function(){
-            Route::get('/','Admin\UserController@managers')->name('managers');
+            Route::get('/','UserController@managers')->name('managers');
         });
+
         Route::group(['prefix' => 'salaries'], function(){
-            Route::get('/','Admin\SalaryController@index')->name('salaries');
+            Route::get('/','SalaryController@index')->name('salaries');
         });
+
         Route::group(['prefix' => 'tickets'], function(){
-            Route::get('/','Admin\TicketController@index')->name('tickets');
+            Route::get('/','TicketController@index')->name('tickets');
         });
+
         Route::group(['prefix' => 'chats'], function(){
-            Route::get('/','Admin\ChatController@index')->name('chats');
-            Route::get('create','Admin\ChatController@create')->name('createChat');
-            Route::post('store','Admin\ChatController@store')->name('storeChat');
+            Route::get('/','ChatController@index')->name('chats');
+            Route::get('create','ChatController@create')->name('createChat');
+            Route::post('store','ChatController@store')->name('storeChat');
         });
+
         Route::group(['prefix' => 'options'], function(){
-            Route::get('/','Admin\OptionController@index')->name('options');
+            Route::get('/','OptionController@index')->name('options');
         });
+
         Route::group(['prefix' => 'notices'], function(){
-            Route::get('/','Admin\NoticeController@index')->name('notices');
+            Route::get('/','NoticeController@index')->name('notices');
         });
     });
 });

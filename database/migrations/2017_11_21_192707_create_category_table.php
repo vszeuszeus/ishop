@@ -18,6 +18,7 @@ class CreateCategoryTable extends Migration
             $table->integer('category_id');
             $table->string('name',255)->unique();
             $table->string('photo_path',255)->nullable();
+            $table->string('photo_alt',255)->nullable();
             $table->text('description',2000)->nullable();
             $table->boolean('premodaration');
             $table->string('url',255)->unique();

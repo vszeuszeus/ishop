@@ -14,7 +14,7 @@
                     <a href="{{route('products')}}" class="a_back">&lt;Назад к категориям</a>
 
                     <div class="titlecontent">Новая категория</div>
-                    <form id="" method="POST" action="{{route('category.store')}}">
+                    <form id="" method="POST" action="{{route('category.store')}}" enctype="multipart/form-data">
                         {{csrf_field()}}
 
                         <div class="wrap_group_input">
@@ -33,11 +33,12 @@
                             <div class="wrap_group_inl">
                                 <div class="form_label lab_size_block">Категория:</div>
                                 <div class="wrap-select block_formitem  selectsizeb">
-                                    <select name="" id="" class="select" title="Выберите родительскую категорию">
+                                    <select name="category_id" id="" class="select" title="Выберите родительскую категорию">
                                         <option value="0">Выберите родительскую категорию</option>
-                                        {{--@foreach($categories as $category)
-                                            <option @if($category = old('category_id') @endifvalue="{{$category->id}}">{{$category->name}}</option>
-                                        @endforeach--}}
+                                        @foreach($categories as $category)
+                                            @php $old_category = old('category_id'); @endphp
+                                            <option @if($category == $old_category) selected @endif value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
                                     </select>
                                     @if ($errors->has('category_id'))
                                         <span class="help-block">
@@ -51,11 +52,11 @@
 
                         <div class="wrap_group_input">
                             <div class="block_fotoupl">
-                                <div class="img_fotoupl"><img src="images/foto-def.jpg" alt=""></div>
+                                <div class="img_fotoupl"><img src="{{secure_asset('images/foto-def.jpg')}}" alt=""></div>
                             </div>
                             <div class="block_fotoupl">
                                 <div class="form_label lab_size_block">Добавьте фото:</div>
-                                <a href="#" class="btn_type14">Добавить фото</a>
+                                <input type="file" name="photo_path" class="btn_type14">
                                 @if ($errors->has('photo_path'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('photo_path') }}</strong>
@@ -68,10 +69,10 @@
                         <div class="wrap_group_input">
                             <div class="form_label lab_size_block">описание на сайте:</div>
                             <div class="block_formitem">
-                                <textarea name="" id="" class="textarea_rev  textarea_t2" placeholder="Введите описание"></textarea>
-                                @if ($errors->has('login'))
+                                <textarea name="description" id="" class="textarea_rev  textarea_t2" placeholder="Введите описание">{{old('description')}}</textarea>
+                                @if ($errors->has('description'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('login') }}</strong>
+                                        <strong>{{ $errors->first('description') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -81,11 +82,11 @@
                         <div class="wrap_group_input">
                             <div class="form_label lab_size_block">премодерация:</div>
                             <div class="block_formitem wr_input_type">
-                                <input type="checkbox" class="input_check input_check_inl" checked="checked" />
+                                <input type="checkbox" name="premodaration" class="input_check input_check_inl" @if(old('premodaration'))checked="checked"@endif/>
                                 <div class="check_label">Задать премодерацию товаров в этой категории</div>
-                                @if ($errors->has('login'))
+                                @if ($errors->has('premodaration'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('login') }}</strong>
+                                        <strong>{{ $errors->first('premodaration') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -99,10 +100,10 @@
                             <div class="block_formitem">
                                 <div class="form_label">URL:</div>
                                 <div class="wr_input_cont">
-                                    <input type="text" class="input_content" placeholder>
-                                    @if ($errors->has('login'))
+                                    <input type="text" name="url" class="input_content" value="{{old('url')}}" placeholder>
+                                    @if ($errors->has('url'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('login') }}</strong>
+                                        <strong>{{ $errors->first('url') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -111,10 +112,10 @@
                             <div class="block_formitem">
                                 <div class="form_label">Description:</div>
                                 <div class="wr_input_cont">
-                                    <input type="text" class="input_content" placeholder>
-                                    @if ($errors->has('login'))
+                                    <input type="text" name="header_description" class="input_content" value="{{old('header_description')}}"placeholder>
+                                    @if ($errors->has('header_description'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('login') }}</strong>
+                                        <strong>{{ $errors->first('header_description') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -123,10 +124,10 @@
                             <div class="block_formitem">
                                 <div class="form_label">Keywords:</div>
                                 <div class="wr_input_cont">
-                                    <input type="text" class="input_content" placeholder>
-                                    @if ($errors->has('login'))
+                                    <input type="text" name="keywords" class="input_content" value="{{old('keywords')}}" placeholder>
+                                    @if ($errors->has('keywords'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('login') }}</strong>
+                                        <strong>{{ $errors->first('keywords') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -135,10 +136,10 @@
                             <div class="block_formitem">
                                 <div class="form_label">Title:</div>
                                 <div class="wr_input_cont">
-                                    <input type="text" class="input_content" placeholder>
-                                    @if ($errors->has('login'))
+                                    <input type="text" name="title" class="input_content" value="{{old('title')}}" placeholder>
+                                    @if ($errors->has('title'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('login') }}</strong>
+                                        <strong>{{ $errors->first('title') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -147,10 +148,22 @@
                             <div class="block_formitem">
                                 <div class="form_label">H1:</div>
                                 <div class="wr_input_cont">
-                                    <input type="text" class="input_content" placeholder>
-                                    @if ($errors->has('login'))
+                                    <input type="text" name="h1" class="input_content" value="{{old('h1')}}" placeholder>
+                                    @if ($errors->has('h1'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('login') }}</strong>
+                                        <strong>{{ $errors->first('h1') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="block_formitem">
+                                <div class="form_label">Фото alt:</div>
+                                <div class="wr_input_cont">
+                                    <input type="text" name="photo_alt" class="input_content" value="{{old('photo_alt')}}" placeholder>
+                                    @if ($errors->has('photo_alt'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('photo_alt') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -158,8 +171,6 @@
 
 
                         </div><!--wrap_group_input-->
-
-
                         <div class="wrap_group">
                             <input type="submit" class="btn_type14" value="Сохранить">
                         </div>
