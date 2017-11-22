@@ -19,7 +19,7 @@ class CreateCategoryTable extends Migration
             $table->string('name',255)->unique();
             $table->string('photo_path',255)->nullable();
             $table->string('photo_alt',255)->nullable();
-            $table->text('description',2000)->nullable();
+            $table->text('description')->nullable();
             $table->boolean('premodaration');
             $table->string('url',255)->unique();
             $table->string('header_description',255)->nullable();

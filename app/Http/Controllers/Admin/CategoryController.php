@@ -73,7 +73,7 @@ class CategoryController extends Controller
 
     public function update(Category $category, CategoryRequest $request)
     {
-        $category = $this->category->update([
+        $category = $category->update([
             'name' => $request->name,
             'category_id' => $request->category_id,
             'photo_alt' => $request->setBaseIfEmpty('photo_alt','name'),
