@@ -6,6 +6,8 @@ use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use Illuminate\Support\Facades\Storage;
+
 
 class CategoryController extends Controller
 {
@@ -73,18 +75,18 @@ class CategoryController extends Controller
 
     public function update(Category $category, CategoryRequest $request)
     {
-        $category = $category->update([
-            'name' => $request->name,
-            'category_id' => $request->category_id,
-            'photo_alt' => $request->setBaseIfEmpty('photo_alt','name'),
-            'description' => $request->description,
-            'premodaration' => ($request->has($request->premodaration))? 1 : 0,
-            'url' => $request->setBaseIfEmpty('url','name', true),
-            'header_description' => $request->setBaseIfEmpty('header_description','name'),
-            'keywords' => $request->setBaseIfEmpty('keywords','name'),
-            'title' => $request->setBaseIfEmpty('title','name'),
-            'h1' => $request->setBaseIfEmpty('h1','name'),
-        ]);
+
+        $category->name = $request->name;
+        $category->category_id = $request->category_id;
+        $category->photo_alt = $request->input('photo_alt', $request->name);
+        $category->description = $request->description;
+        $category->premodaration = ($request->has($request->premodaration))? 1 : 0;
+        $category->url = str_slug($request->input('url', $request->name));
+        $category->header_description = $request->input('header_description', $request->name);
+        $category->keywords = $request->input('keywords', $request->name);
+        $category->title = $request->input('title', $request->name);
+        $category->h1 = $request->input('h1', $request->name);
+        $category->save();
 
         if($request->hasFile('photo_path'))
         {
@@ -93,5 +95,25 @@ class CategoryController extends Controller
 
         return redirect()->route('category.show', $category)->with('message', trans('categories.update',[$category->name]));
     }
+
+    public function delete(Category $category)
+    {
+
+        if(Category::count() > 1)
+        {
+            $category->deletePhotoPath();
+            $category->delete();
+            return redirect()->route('products')->with('message', trans('categories.delete'));
+        }
+        else{
+            return redirect()->route('category.show', $category)->with('message', trans('categories.noDelete'));
+        }
+    }
+
+    public function test(Category $category)
+    {
+        return Storage::makeDirectory($category->path);
+    }
+
 
 }

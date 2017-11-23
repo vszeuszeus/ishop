@@ -53,6 +53,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('{category}/edit','CategoryController@edit')->name('category.edit');
             Route::patch('{category}/update','CategoryController@update')->name('category.update');
             Route::get('{category}/delete','CategoryController@delete')->name('category.delete');
+            Route::get('test','CategoryController@test')->name('category.test');
         });
 
         Route::group(['prefix' => 'product_groups'], function()

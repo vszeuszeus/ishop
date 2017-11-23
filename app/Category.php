@@ -25,10 +25,15 @@ class Category extends Model
 
     public function restorePhotoPath($file)
     {
-        Storage::delete($this->photoPath);
+        Storage::delete('public'.substr($this->photo_path, 7));
         $save_path = 'storage/'.substr($file->store('public/upload/categories'), 7);
         $this->photo_path = $save_path;
         $this->save();
         return $save_path;
+    }
+
+    public function deletePhotoPath()
+    {
+        Storage::delete('public'.substr($this->photo_path, 7));
     }
 }
