@@ -32,5 +32,16 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
     }
 
+    public function scopeManagers($query)
+    {
+        return $query->whereHas('roles' , function ($q) {
+            $q->where('name', 'manager');
+        });
+    }
+
+
+
+
+
 
 }

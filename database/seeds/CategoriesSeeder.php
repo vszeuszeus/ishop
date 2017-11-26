@@ -14,10 +14,18 @@ class CategoriesSeeder extends Seeder
     {
         Category::create([
             'name' => 'baseCategory',
+            'photo_path' => 'images/foto-def.jpg',
+            'photo_alt' => 'base alt',
+            'description' => 'min base desacription',
             'url' => 'base-category',
             'h1' => 'baseCategory',
+            'title' => 'min base desacription',
             'keywords' => 'base-category',
-            'title' => 'base-category'
+            'header_description' => 'base-category',
+            'category_id' => 0,
+            'premodaration' => 0,
         ]);
     }
+
+
 }

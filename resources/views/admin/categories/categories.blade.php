@@ -12,7 +12,7 @@
                         <div class="col-xs-12">
                             <div class="title_block mb50">
                                 <div class="titlecontent">Товары</div>
-                                <a href="#" class="btn_type14">Добавить группу</a>
+                                <a href="{{route('productGroup.create')}}" class="btn_type14">Добавить группу</a>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -55,90 +55,27 @@
                                         <div class="tabtd">Товаров  на подерации</div>
                                         <div class="tabtd">Действия</div>
                                     </div>
-                                    <div class="tabrow">
-                                        <div class="tabtd"><a href="#">6-тизначный</a></div>
-                                        <div class="tabtd">100</div>
-                                        <div class="tabtd">10</div>
-                                        <div class="tabtd">1</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td watch_noactiv"></a>
+                                    @foreach($category->productGroups as $productGroup)
+                                        <div class="tabrow">
+                                            <div class="tabtd"><a href="{{route('productGroup.show', [$productGroup])}}">{{$productGroup->name}}</a></div>
+                                            <div class="tabtd">{{$productGroup->price}}</div>
+                                            <div class="tabtd">10</div>
+                                            <div class="tabtd">1</div>
+                                            <div class="tabtd">
+                                                @if($productGroup->active)
+                                                    <a href="{{route('productGroup.setDisActive', [$productGroup])}}"   class="icon_td watch"></a>
+                                                @else
+                                                    <a href="{{route('productGroup.setActive', [$productGroup])}}"   class="icon_td watch_noactiv"></a>
+                                                @endif
+
+                                            </div>
+                                            <div class="tabtd">Статус</div>
+                                            <div class="tabtd">
+                                                <a href="{{route('productGroup.edit', [$productGroup])}}" class="icon_td chan"></a>
+                                                <a href="{{route('productGroup.delete',[$productGroup])}}" class="icon_td delete"></a>
+                                            </div>
                                         </div>
-                                        <div class="tabtd">Статус</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td chan"></a>
-                                            <a href="#" class="icon_td delete"></a>
-                                        </div>
-                                    </div>
-                                    <div class="tabrow">
-                                        <div class="tabtd"><a href="#">7-тизначный</a></div>
-                                        <div class="tabtd">100</div>
-                                        <div class="tabtd">10</div>
-                                        <div class="tabtd">2</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td watch"></a>
-                                        </div>
-                                        <div class="tabtd">Статус</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td chan"></a>
-                                            <a href="#" class="icon_td delete"></a>
-                                        </div>
-                                    </div>
-                                    <div class="tabrow">
-                                        <div class="tabtd"><a href="#">8-тизначный</a></div>
-                                        <div class="tabtd">100</div>
-                                        <div class="tabtd">10</div>
-                                        <div class="tabtd">3</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td watch"></a>
-                                        </div>
-                                        <div class="tabtd">Статус</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td chan"></a>
-                                            <a href="#" class="icon_td delete"></a>
-                                        </div>
-                                    </div>
-                                    <div class="tabrow">
-                                        <div class="tabtd"><a href="#">Группа 5</a></div>
-                                        <div class="tabtd">100</div>
-                                        <div class="tabtd">10</div>
-                                        <div class="tabtd">4</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td watch"></a>
-                                        </div>
-                                        <div class="tabtd">Статус</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td chan"></a>
-                                            <a href="#" class="icon_td delete"></a>
-                                        </div>
-                                    </div>
-                                    <div class="tabrow">
-                                        <div class="tabtd"><a href="#">Группа 4</a></div>
-                                        <div class="tabtd">1000</div>
-                                        <div class="tabtd">10</div>
-                                        <div class="tabtd">1</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td watch"></a>
-                                        </div>
-                                        <div class="tabtd">Статус</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td chan"></a>
-                                            <a href="#" class="icon_td delete"></a>
-                                        </div>
-                                    </div>
-                                    <div class="tabrow">
-                                        <div class="tabtd"><a href="#">Группа 3</a></div>
-                                        <div class="tabtd">100</div>
-                                        <div class="tabtd">10</div>
-                                        <div class="tabtd">2</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td watch"></a>
-                                        </div>
-                                        <div class="tabtd">Статус</div>
-                                        <div class="tabtd">
-                                            <a href="#" class="icon_td chan"></a>
-                                            <a href="#" class="icon_td delete"></a>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div><!--wrap_block_table-->
 

@@ -58,7 +58,14 @@ Route::group(['middleware' => 'auth'], function(){
 
         Route::group(['prefix' => 'product_groups'], function()
         {
-            //
+            Route::get('/{productGroup}/show','ProductGroupController@show')->name('productGroup.show');
+            Route::get('create', 'ProductGroupController@create')->name('productGroup.create');
+            Route::post('store', 'ProductGroupController@store')->name('productGroup.store');
+            Route::get('{productGroup}/edit','ProductGroupController@edit')->name('productGroup.edit');
+            Route::patch('{productGroup}/update','ProductGroupController@update')->name('productGroup.update');
+            Route::get('{productGroup}/delete','ProductGroupController@delete')->name('productGroup.delete');
+            Route::get('{productGroup}/setActive','ProductGroupController@setActive')->name('productGroup.setActive');
+            Route::get('{productGroup}/disActive','ProductGroupController@disActive')->name('productGroup.setDisActive');
         });
 
         Route::group(['prefix' => 'sales'], function(){

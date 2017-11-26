@@ -36,4 +36,8 @@ class Category extends Model
     {
         Storage::delete('public'.substr($this->photo_path, 7));
     }
+
+    public function productGroups(){
+        return $this->hasMany('App\ProductGroup');
+    }
 }

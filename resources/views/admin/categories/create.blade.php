@@ -35,9 +35,9 @@
                                 <div class="wrap-select block_formitem  selectsizeb">
                                     <select name="category_id" id="" class="select" title="Выберите родительскую категорию">
                                         <option value="0">Выберите родительскую категорию</option>
+                                        @php $old_category = old('category_id'); @endphp
                                         @foreach($categories as $category)
-                                            @php $old_category = old('category_id'); @endphp
-                                            <option @if($category == $old_category) selected @endif value="{{$category->id}}">{{$category->name}}</option>
+                                            <option @if($category ->id == $old_category) selected @endif value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('category_id'))
@@ -82,7 +82,7 @@
                         <div class="wrap_group_input">
                             <div class="form_label lab_size_block">премодерация:</div>
                             <div class="block_formitem wr_input_type">
-                                <input type="checkbox" name="premodaration" class="input_check input_check_inl" @if(old('premodaration'))checked="checked"@endif/>
+                                <input @if(old('premodaration')) checked="checked" @endif type="checkbox" name="premodaration" class="input_check input_check_inl" />
                                 <div class="check_label">Задать премодерацию товаров в этой категории</div>
                                 @if ($errors->has('premodaration'))
                                     <span class="help-block">

@@ -15,7 +15,10 @@ class UserRolesSeeder extends Seeder
     {
         $users = [
             ['user'=> 'member', 'role'=> 4],
-            ['user'=> 'admin', 'role'=> 1]
+            ['user'=> 'admin', 'role'=> 1],
+            ['user'=> 'baseManager1', 'role'=> 3],
+            ['user'=> 'baseManager2', 'role'=> 3],
+            ['user'=> 'baseManager3', 'role'=> 3]
         ];
 
         $roles = ['superadmin', 'admin', 'manager', 'member'];

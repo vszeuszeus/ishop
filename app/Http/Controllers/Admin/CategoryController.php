@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CategoryRequest;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
@@ -22,7 +23,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.categories',[
             'categories' => Category::all(),
-            'category' => Category::first()
+            'category' => Category::first()->load('productGroups')
         ]);
     }
 
@@ -30,7 +31,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.categories',[
             'categories' => Category::all(),
-            'category' => $category
+            'category' => $category->load('productGroups')->paginate('3')
         ]);
     }
 
@@ -81,11 +82,11 @@ class CategoryController extends Controller
         $category->photo_alt = $request->input('photo_alt', $request->name);
         $category->description = $request->description;
         $category->premodaration = ($request->has($request->premodaration))? 1 : 0;
-        $category->url = str_slug($request->input('url', $request->name));
-        $category->header_description = $request->input('header_description', $request->name);
-        $category->keywords = $request->input('keywords', $request->name);
-        $category->title = $request->input('title', $request->name);
-        $category->h1 = $request->input('h1', $request->name);
+        $category->url = $request->setBaseIfEmpty('url','name', true);
+        $category->header_description = $request->setBaseIfEmpty('header_description','name');
+        $category->keywords = $request->setBaseIfEmpty('keywords','name');
+        $category->title = $request->setBaseIfEmpty('title','name');
+        $category->h1 = $request->setBaseIfEmpty('h1','name');
         $category->save();
 
         if($request->hasFile('photo_path'))
@@ -110,9 +111,9 @@ class CategoryController extends Controller
         }
     }
 
-    public function test(Category $category)
+    public function test()
     {
-        return Storage::makeDirectory($category->path);
+        return Tag::firstOrCreate(['name' => 'asdasd123']);
     }
 
 
