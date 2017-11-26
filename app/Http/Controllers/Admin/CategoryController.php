@@ -31,7 +31,7 @@ class CategoryController extends Controller
     {
         return view('admin.categories.categories',[
             'categories' => Category::all(),
-            'category' => $category->load('productGroups')->paginate('3')
+            'category' => $category->load('productGroups')
         ]);
     }
 
