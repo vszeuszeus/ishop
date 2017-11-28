@@ -55,7 +55,7 @@
                                         <div class="tabtd">Товаров  на подерации</div>
                                         <div class="tabtd">Действия</div>
                                     </div>
-                                    @foreach($category->productGroups as $productGroup)
+                                    @foreach($groupProducts as $productGroup)
                                         <div class="tabrow">
                                             <div class="tabtd"><a href="{{route('productGroup.show', [$productGroup])}}">{{$productGroup->name}}</a></div>
                                             <div class="tabtd">{{$productGroup->price}}</div>

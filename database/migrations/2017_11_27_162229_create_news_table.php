@@ -21,7 +21,6 @@ class CreateNewsTable extends Migration
             $table->text('full_text');
             $table->string('h1');
             $table->integer('new_category_id');
-            $table->
             $table->timestamps();
         });
     }

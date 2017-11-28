@@ -7,6 +7,7 @@ use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use App\ProductGroup;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -27,11 +28,13 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function show(Category $category)
+    public function show(Category $category, Request $request)
     {
         return view('admin.categories.categories',[
             'categories' => Category::all(),
-            'category' => $category->load('productGroups')
+            'category' => $category,
+            'groupProducts' => ProductGroup::where('category_id', $category->id)
+                ->paginate( ($request->has('paginate')) ? $request->paginate : 10 )
         ]);
     }
 
@@ -48,14 +51,14 @@ class CategoryController extends Controller
             'name' => $request->name,
             'category_id' => $request->category_id,
             'photo_path' => 'images/foto-def.jpg',
-            'photo_alt' => $request->setBaseIfEmpty('photo_alt','name'),
             'description' => $request->description,
-            'premodaration' => ($request->has($request->premodaration))? 1 : 0,
-            'url' => $request->setBaseIfEmpty('url','name', true),
-            'header_description' => $request->setBaseIfEmpty('header_description','name'),
-            'keywords' => $request->setBaseIfEmpty('keywords','name'),
-            'title' => $request->setBaseIfEmpty('title','name'),
-            'h1' => $request->setBaseIfEmpty('h1','name'),
+            'premodaration' => ($request->has('premodaration'))? 1 : 0,
+            'url' => str_slug($request->setBaseIfEmpty('url', 'name')),
+            'header_description' => $request->setBaseIfEmpty('header_description', 'name'),
+            'keywords' => $request->setBaseIfEmpty('keywords', 'name'),
+            'title' => $request->setBaseIfEmpty('title', 'name'),
+            'h1' => $request->setBaseIfEmpty('h1', 'name'),
+            'photo_alt' => $request->setBaseIfEmpty('photo_alt', 'name'),
         ]);
 
         if($request->hasFile('photo_path'))
@@ -79,14 +82,14 @@ class CategoryController extends Controller
 
         $category->name = $request->name;
         $category->category_id = $request->category_id;
-        $category->photo_alt = $request->input('photo_alt', $request->name);
         $category->description = $request->description;
-        $category->premodaration = ($request->has($request->premodaration))? 1 : 0;
-        $category->url = $request->setBaseIfEmpty('url','name', true);
-        $category->header_description = $request->setBaseIfEmpty('header_description','name');
-        $category->keywords = $request->setBaseIfEmpty('keywords','name');
-        $category->title = $request->setBaseIfEmpty('title','name');
-        $category->h1 = $request->setBaseIfEmpty('h1','name');
+        $category->premodaration = ($request->has('premodaration'))? 1 : 0;
+        $category->url = str_slug($request->setBaseIfEmpty('url', 'name'));
+        $category->header_description = $request->setBaseIfEmpty('header_description', 'name');
+        $category->keywords = $request->setBaseIfEmpty('keywords', 'name');
+        $category->title = $request->setBaseIfEmpty('title', 'name');
+        $category->h1 = $request->setBaseIfEmpty('h1', 'name');
+        $category->photo_alt = $request->setBaseIfEmpty('photo_alt', 'name');
         $category->save();
 
         if($request->hasFile('photo_path'))

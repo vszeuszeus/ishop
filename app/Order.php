@@ -10,4 +10,12 @@ class Order extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function status(){
+        return $this->belongsTo('App\OrderStatus', 'order_status_id');
+    }
+
+    public function product(){
+        return $this->belongsTo('App\Product');
+    }
 }
