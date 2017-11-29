@@ -44,6 +44,15 @@ Route::group(['middleware' => 'auth'], function(){
 
         Route::group(['prefix' => 'products'], function(){
             Route::get('/','CategoryController@index')->name('products');
+            Route::get('{product}/show', 'ProductController@show')->name('product.show');
+            Route::get('create/{productGroup}', 'ProductController@create')->name('product.create');
+            Route::post('store', 'ProductController@store')->name('product.store');
+            Route::get('{product}/edit','ProductController@edit')->name('product.edit');
+            Route::patch('{product}/update','ProductController@update')->name('product.update');
+            Route::get('{product}/delete','ProductController@delete')->name('product.delete');
+            Route::get('{product}/setActive','ProductController@setActive')->name('product.setActive');
+            Route::get('{product}/disActive','ProductController@disActive')->name('product.setDisActive');
+
 
         });
         Route::group(['prefix' => 'categories'], function(){
@@ -66,6 +75,21 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('{productGroup}/delete','ProductGroupController@delete')->name('productGroup.delete');
             Route::get('{productGroup}/setActive','ProductGroupController@setActive')->name('productGroup.setActive');
             Route::get('{productGroup}/disActive','ProductGroupController@disActive')->name('productGroup.setDisActive');
+        });
+
+        Route::group(['prefix' => 'products'], function(){
+
+        });
+
+        Route::group(['prefix' => 'managers'], function(){
+            Route::get('{manager}/show', 'ManagerController@show')->name('manager.show');
+            Route::get('create', 'ManagerController@create')->name('manager.create');
+            Route::post('store', 'ManagerController@store')->name('manager.store');
+            Route::get('{manager}/edit','ManagerController@edit')->name('manager.edit');
+            Route::patch('{manager}/update','ManagerController@update')->name('manager.update');
+            Route::get('{manager}/delete','ManagerController@delete')->name('manager.delete');
+            Route::get('{manager}/setActive','ManagerController@setActive')->name('manager.setActive');
+            Route::get('{manager}/disActive','ManagerController@disActive')->name('manager.setDisActive');
         });
 
         Route::group(['prefix' => 'sales'], function(){

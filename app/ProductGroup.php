@@ -33,6 +33,10 @@ class ProductGroup extends Model
     public function managers(){
         return $this->belongsToMany('App\User', 'product_group_user', 'product_group_id', 'user_id');
     }
+
+    public function products(){
+        return $this->hasMany('App\Product');
+    }
     //end relations
 
     //start scopes

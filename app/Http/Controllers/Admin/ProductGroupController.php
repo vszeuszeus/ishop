@@ -20,6 +20,13 @@ class ProductGroupController extends Controller
         $this->productGroup = $productGroup;
     }
 
+    public function show(ProductGroup $productGroup)
+    {
+        return view('admin.productGroups.show', [
+            'productGroup' => $productGroup->load('category', 'products.manager')
+        ]);
+    }
+
     public function create()
     {
 
