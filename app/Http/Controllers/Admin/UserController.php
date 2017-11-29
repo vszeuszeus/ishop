@@ -16,7 +16,9 @@ class UserController extends Controller
             ->with('orders')
             ->get();
 
-        return view()
+        return view('admin.users.managers', [
+            'managers' => $managers
+        ]);
 
     }
 

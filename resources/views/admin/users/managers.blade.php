@@ -26,48 +26,16 @@
                                     <div class="tabtd">Текущий залог</div>
                                     <div class="tabtd">Открыто тикетов</div>
                                 </div>
-                                <div class="tabrow">
-                                    <div class="tabtd"><a href="#">Менеджер 1</a></div>
-                                    <div class="tabtd">01.01.2001</div>
-                                    <div class="tabtd"><a href="#">123456</a></div>
-                                    <div class="tabtd"><a href="#">123456</a></div>
-                                    <div class="tabtd"><span class="strtd">123456</span></div>
-                                    <div class="tabtd"><span class="strtd">0</span></div>
-                                </div>
-
-                                <div class="tabrow">
-                                    <div class="tabtd"><a href="#">Менеджер </a></div>
-                                    <div class="tabtd">01.01.2001</div>
-                                    <div class="tabtd"><a href="#">123456</a></div>
-                                    <div class="tabtd"><a href="#">123456</a></div>
-                                    <div class="tabtd"><span class="tdred">-123456</span></div>
-                                    <div class="tabtd"><a href="#">5</a></div>
-                                </div>
-                                <div class="tabrow">
-                                    <div class="tabtd"><a href="#">Менеджер 1</a></div>
-                                    <div class="tabtd">01.01.2001</div>
-                                    <div class="tabtd"><a href="#">123456</a></div>
-                                    <div class="tabtd"><a href="#">123456</a></div>
-                                    <div class="tabtd"><span class="strtd">123456</span></div>
-                                    <div class="tabtd"><span class="strtd">0</span></div>
-                                </div>
-                                <div class="tabrow">
-                                    <div class="tabtd"><a href="#">Менеджер 1</a></div>
-                                    <div class="tabtd">01.01.2001</div>
-                                    <div class="tabtd"><a href="#">123456</a></div>
-                                    <div class="tabtd"><a href="#">123456</a></div>
-                                    <div class="tabtd"><span class="strtd">123456</span></div>
-                                    <div class="tabtd"><span class="strtd">0</span></div>
-                                </div>
-                                <div class="tabrow">
-                                    <div class="tabtd"><a href="#">Менеджер 1</a></div>
-                                    <div class="tabtd">01.01.2001</div>
-                                    <div class="tabtd"><a href="#">123456</a></div>
-                                    <div class="tabtd"><a href="#">123456</a></div>
-                                    <div class="tabtd"><span class="strtd">23456</span></div>
-                                    <div class="tabtd"><span class="strtd">0</span></div>
-                                </div>
-
+                                @foreach($managers as $manager)
+                                    <div class="tabrow">
+                                        <div class="tabtd"><a href="#">{{$manager->name}}</a></div>
+                                        <div class="tabtd">{{$manager->created_at}}</div>
+                                        <div class="tabtd"><a href="#">{{count($manager->orders)}}</a></div>
+                                        <div class="tabtd"><a href="#">{{$manager->orders_count}}</a></div>
+                                        <div class="tabtd"><span class="strtd">{{$manager->deposit or 0}}</span></div>
+                                        <div class="tabtd"><span class="strtd">{{$manager->tickets_count}}</span></div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

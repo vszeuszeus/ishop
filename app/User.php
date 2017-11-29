@@ -46,8 +46,8 @@ class User extends Authenticatable
     }
 
     public function scopeWithEndedOrdersCount($query){
-        return $query->withCount(['tickets' => function($q){
-            $q->whereIn('ticket_status_id', [2,3]);
+        return $query->withCount(['orders' => function($q){
+            $q->where('order_status_id', 4);
         }]);
     }
 
