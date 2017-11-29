@@ -39,6 +39,18 @@ class User extends Authenticatable
         });
     }
 
+    public function scopeWithProblemTicketsCount($query){
+        return $query->withCount(['tickets' => function($q){
+            $q->whereIn('ticket_status_id', [2,3]);
+        }]);
+    }
+
+    public function scopeWithEndedOrdersCount($query){
+        return $query->withCount(['tickets' => function($q){
+            $q->whereIn('ticket_status_id', [2,3]);
+        }]);
+    }
+
     public function orders(){
         return $this->hasMany('App\Order');
     }

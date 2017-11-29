@@ -20,11 +20,14 @@ class CategoryController extends Controller
         $this->category = $category;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $category = Category::first();
         return view('admin.categories.categories',[
             'categories' => Category::all(),
-            'category' => Category::first()->load('productGroups')
+            'category' => $category,
+            'groupProducts' => ProductGroup::where('category_id', $category->id)
+                ->paginate( ($request->has('paginate')) ? $request->paginate : 10 )
         ]);
     }
 

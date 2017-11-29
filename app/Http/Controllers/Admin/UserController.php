@@ -10,10 +10,15 @@ class UserController extends Controller
 {
     public function managers()
     {
-        return view('admin.users.managers', User::managers()->with('tickets', 'orders')->get());
+        $managers = User::managers()
+            ->withProblemTicketsCount()
+            ->withEndedOrdersCount()
+            ->with('orders')
+            ->get();
+
+        return view()
+
     }
-
-
 
 
 
