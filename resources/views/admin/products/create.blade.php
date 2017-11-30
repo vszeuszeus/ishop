@@ -35,30 +35,47 @@
                         </div>
                     </div>
 
-
-
-
-
-                    <div class="wrap_group_input">
-                        <div class="form_label lab_size_block">данные товара:</div>
-                        <div class="block_formitem">
-                            <textarea name="" id="" class="textarea_rev  textarea_t2" placeholder="Введите описание товара: это описание клиент увидит, коглда оплатит товар"></textarea>
+                    <form id="formSent" action="{{route('product.store')}}" method="POST">
+                        {{csrf_field()}}
+                        <input type="hidden" name="productGroup_id" value="{{$productGroup->id}}">
+                        <input type="hidden" name="type_product_id" id="type_product_id" value="1">
+                        @if ($errors->has('photo_path'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('photo_path') }}</strong>
+                                    </span>
+                        @endif
+                        <div class="wrap_group_input">
+                            <div class="form_label lab_size_block">данные товара:</div>
+                            <div class="block_formitem">
+                                <textarea name="description" id="" class="textarea_rev  textarea_t2" placeholder="Введите описание товара: это описание клиент увидит, коглда оплатит товар"></textarea>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="wrap_group_input">
-                        <div class="form_label lab_size_block">фото товара:</div>
-                        <div class="block_formitem">
-                            <input type="file" class="file" name="">
+                        <div class="wrap_group_input">
+                            <div class="form_label lab_size_block">фото товара:</div>
+                            <div class="block_formitem">
+                                <input multiple name="photos" type="file" class="file">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="wrap_group_input">
-                        <div class="block_btn_type2">
-                            <a href="#" class="order_btn color_r">Сохранить как черновик</a>
-                            <a href="#" class="order_btn color_w">Сохранить и отправить на модерацию</a>
+                        <div class="wrap_group_input">
+                            <div class="block_btn_type2">
+                                <input type="submit" class="order_btn color_r" onclick="sentForm()"value="Сохранить как черновик"/>
+                                <input type="submit" class="order_btn color_w" value="Сохранить и отправить на модерацию"/>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+
+                    <script type="text/javascript">
+                        function sentForm() {
+                            var form = document.getElementById('formSent');
+                            var input = document.getElementById('type_product_id');
+                            input.value = 2;
+                            form.submit();
+                        }
+                    </script>
+
+
 
 
 
