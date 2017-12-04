@@ -35,7 +35,7 @@
 
                         <div class="col-xs-12 col-md-6 col-lg-6">
                             <div class="wrap_group_input wr_btn_heig">
-                                <a href="{{route('product.create', [$productGroup])}}" class="btn_type14 ">Добавить новый товар в группу</a>
+                                <a href="{{route('product.create', [$productGroup])}}" class="btn_type14 ">Добавить товары в группу</a>
                             </div>
                         </div>
 
@@ -44,8 +44,9 @@
 
 
                     <!-- <div class="wrap_group_input"> -->
-                    <div class="form_label lab_size_block">Категория: {{$productGroup->category->name}}</div>
-                    @include('message')
+                    {{--<div class="form_label lab_size_block">Категория: {{$productGroup->category->name}}</div>--}}
+                    @include('common.errors')
+                    @include('common.message')
                     <div class="wrap_block_table">
                         <div class="table_cont table_type1">
                             <div class="tabrow">

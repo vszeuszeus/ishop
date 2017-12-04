@@ -12,39 +12,16 @@
 
                 <div class="col-xs-12 col-md-9 col-lg-10">
 
-                    <a href="{{route('productGroup.show', [$productGroup])}}" class="a_back">&lt; Назад к группам
-                        товаров</a>
+                    <a href="{{route('productGroup.show', [$productGroup])}}" class="a_back">&lt;Назад к товарам</a>
                     <div class="row">
-                        <div class="col-xs-12 col-md-12 col-lg-6">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
                             <div class="titlecontent">Добавление товаров</div>
-                            <div class="resalt_order">Категория: {{$productGroup->category->name}} |
-                                Группа: {{$productGroup->name}}</div>
+                            <div class="resalt_order">Категория: {{$productGroup->category->name}} | Группа: {{$productGroup->name}}</div>
                         </div>
-                        {{--<div class="col-xs-12 col-md-12 col-lg-6">
-                            <div class="right_s">
-                                <div class="form_label">Изменить статус товара</div>
-                                <!--  <div class="wr_input_c">  -->
-                                <div class="wrap-select selectsizeb">
-                                    <select name="" id="" class="select">
-                                        <option value="">Черновик</option>
-                                        <option value="">Зарезервирован</option>
-                                        <option value="">Ожидает модерации</option>
-                                        <option value="">40</option>
-                                    </select>
-                                </div>
-                                <!-- </div> -->
-                            </div>
-                        </div>--}}
                     </div>
-                    @php
-                        echo "
-                            <script type='text/javascript'>
-                                window.input_errors = ".$errors.";".
-                                "window.old_input = 0;".
-                            "</script>";
-                    @endphp
-
                     <div id="table_create_products" class="wrap_group_input">
+                        @include('common.message')
+                        @include('common.errors')
                         <div class="wrap_group_inl">
                             <div class="form_label lab_size_block">Количество товара:</div>
                             <div class="block_formitem">

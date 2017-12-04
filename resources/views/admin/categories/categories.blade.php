@@ -50,17 +50,19 @@
                                         <div class="tabtd">Группа  товаров:</div>
                                         <div class="tabtd">Стоимость:</div>
                                         <div class="tabtd">Товаров добавлено</div>
-                                        <div class="tabtd">Товаров осталось</div>
+                                        <div class="tabtd">Товаров осталось (со статусом активен?)</div>
                                         <div class="tabtd">Активность</div>
-                                        <div class="tabtd">Товаров  на подерации</div>
+                                        <div class="tabtd">Товаров  на модерации</div>
                                         <div class="tabtd">Действия</div>
                                     </div>
                                     @foreach($groupProducts as $productGroup)
                                         <div class="tabrow">
                                             <div class="tabtd"><a href="{{route('productGroup.show', [$productGroup])}}">{{$productGroup->name}}</a></div>
                                             <div class="tabtd">{{$productGroup->price}}</div>
-                                            <div class="tabtd">10</div>
-                                            <div class="tabtd">1</div>
+                                            <div class="tabtd">{{$productGroup->products->count()}}</div>
+                                            <div class="tabtd">{{$productGroup->products->filter(function($item){
+                                                return $item->product_status_id == 2;
+                                            })->count()}}</div>
                                             <div class="tabtd">
                                                 @if($productGroup->active)
                                                     <a href="{{route('productGroup.setDisActive', [$productGroup])}}"   class="icon_td watch"></a>
@@ -69,7 +71,9 @@
                                                 @endif
 
                                             </div>
-                                            <div class="tabtd">Статус</div>
+                                            <div class="tabtd">{{$productGroup->products->filter(function ($item){
+                                                return $item->product_type_id == 2;
+                                            })->count()}}</div>
                                             <div class="tabtd">
                                                 <a href="{{route('productGroup.edit', [$productGroup])}}" class="icon_td chan"></a>
                                                 <a href="{{route('productGroup.delete',[$productGroup])}}" class="icon_td delete"></a>

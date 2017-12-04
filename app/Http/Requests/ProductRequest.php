@@ -25,7 +25,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'productGroup_id' => 'required|integer|exists:product_groups,id',
-            'descriptions' => 'array|max:50',
+            'descriptions' => 'array|max:50|min:1',
             'descriptions.*' => 'string|max:300|nullable',
             'photos' => 'array',
             'photos.*' => 'array|max:50',

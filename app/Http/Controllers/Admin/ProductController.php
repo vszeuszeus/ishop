@@ -36,16 +36,27 @@ class ProductController extends Controller
         $descriptions = $request->descriptions;
         $photos = $request->photos;
         $drafts = $request->drafts;
-        print_r($descriptions);
+
+        $descriptions_collect = collect($descriptions)->filter()->count();
+        if(!$descriptions_collect)
+            return  redirect()->back()->with('message', trans('products.emptyTovar'));
+
+        $product_group = ProductGroup::find($request->productGroup_id);
         foreach($descriptions as $key => $description):
             if(!is_null($description))
             {
-
+                if(isset($drafts[$key])) {
+                    $type = 1;
+                }elseif($product_group->premodaration){
+                    $type = 2;
+                }else{
+                    $type = 3;
+                }
                 $product = $this->product->create([
                     'description' => $description,
                     'product_group_id' => $request->productGroup_id,
                     'product_status_id' => 1,
-                    'product_type_id' => (isset($drafts[$key])) ? 1 : 2,
+                    'product_type_id' => $type,
                     'user_id' => $request->user()->id
                 ]);
                 if( isset($photos[$key] ))
@@ -63,9 +74,11 @@ class ProductController extends Controller
             ->with('message', trans('products.create', ['value' => $product->id]));
     }
 
-    public function edit()
+    public function edit(Product $product)
     {
-        return view('admin.products.edit');
+        return view('admin.products.edit', [
+            'product' => $product->load('group.category', 'photos')
+        ]);
     }
 
     public function delete()

@@ -26,7 +26,7 @@ class CategoryController extends Controller
         return view('admin.categories.categories',[
             'categories' => Category::all(),
             'category' => $category,
-            'groupProducts' => ProductGroup::where('category_id', $category->id)
+            'groupProducts' => ProductGroup::where('category_id', $category->id)->with('products')
                 ->paginate( ($request->has('paginate')) ? $request->paginate : 10 )
         ]);
     }
@@ -36,7 +36,7 @@ class CategoryController extends Controller
         return view('admin.categories.categories',[
             'categories' => Category::all(),
             'category' => $category,
-            'groupProducts' => ProductGroup::where('category_id', $category->id)
+            'groupProducts' => ProductGroup::where('category_id', $category->id)->with('products')
                 ->paginate( ($request->has('paginate')) ? $request->paginate : 10 )
         ]);
     }
@@ -75,8 +75,10 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         return view('admin.categories.edit',[
-            'categories' => Category::all(),
-            'category' => $category
+            'category' => $category,
+            'categories' => Category::all()->filter(function($item) use ($category){
+                return $item->id != $category->id;
+            })
         ]);
     }
 

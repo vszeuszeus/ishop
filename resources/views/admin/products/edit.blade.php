@@ -12,13 +12,13 @@
 
                 <div class="col-xs-12 col-md-9 col-lg-10">
 
-                    <a href="{{route('productGroup.show', [$productGroup])}}" class="a_back">&lt; Назад к группам товаров</a>
+                    <a href="{{route('productGroup.show', [$product->group])}}" class="a_back">&lt; Назад к товарам</a>
                     <div class="row">
-                        <div class="col-xs-12 col-md-12 col-lg-6">
-                            <div class="titlecontent">Новый товар</div>
-                            <div class="resalt_order">Категория: {{$productGroup->category->name}} | Группа: {{$productGroup->name}}</div>
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <div class="titlecontent">Редактирование товара № {{$product->id}}</div>
+                            <div class="resalt_order">Категория: {{$product->group->category->name}} | Группа: {{$product->group->name}}</div>
                         </div>
-                        <div class="col-xs-12 col-md-12 col-lg-6">
+                        {{--<div class="col-xs-12 col-md-12 col-lg-6">
                             <div class="right_s">
                                 <div class="form_label">Изменить статус товара</div>
                                 <!--  <div class="wr_input_c">  -->
@@ -32,12 +32,12 @@
                                 </div>
                                 <!-- </div> -->
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
 
                     <form id="formSent" action="{{route('product.store')}}" method="POST">
                         {{csrf_field()}}
-                        <input type="hidden" name="productGroup_id" value="{{$productGroup->id}}">
+                        <input type="hidden" name="productGroup_id" value="">
                         <input type="hidden" name="type_product_id" id="type_product_id" value="1">
                         @if ($errors->has('photo_path'))
                             <span class="help-block">
