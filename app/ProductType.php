@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductStatus extends Model
+class ProductType extends Model
 {
     //properties
+    protected $table = 'product_types';
     protected $guarded = [];
-    protected $table = 'product_statuses';
 
     //relations
     public function products(){
-        return $this->hasMany('App\Product','product_status_id');
+        return $this->hasMany('App\Product');
     }
 }

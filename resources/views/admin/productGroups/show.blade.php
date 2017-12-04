@@ -45,14 +45,14 @@
 
                     <!-- <div class="wrap_group_input"> -->
                     <div class="form_label lab_size_block">Категория: {{$productGroup->category->name}}</div>
-
+                    @include('message')
                     <div class="wrap_block_table">
                         <div class="table_cont table_type1">
                             <div class="tabrow">
                                 <div class="tabtd">ID товара</div>
                                 <div class="tabtd">Дата добавления</div>
+                                <div class="tabtd">Тип</div>
                                 <div class="tabtd">Статус</div>
-                                <div class="tabtd">Активность</div>
                                 <div class="tabtd">Действия</div>
                                 <div class="tabtd">Менеджер</div>
                             </div>
@@ -60,13 +60,24 @@
                                 <div class="tabrow">
                                     <div class="tabtd">{{$product->id}}</div>
                                     <div class="tabtd">{{$product->created_at}}</div>
-                                    <div class="tabtd"></div>
+                                    <div class="tabtd">{{$product->type->name}}</div>
+                                    <div class="tabtd">{{$product->status->name}}</div>
                                     <div class="tabtd">
-                                        <a href="" class="icon_td watch_noactiv"></a>
-                                    </div>
-                                    <div class="tabtd">
-                                        <a href="{{route('product.edit', [$product])}}" class="icon_td chan"></a>
-                                        <a href="{{route('product.delete', [$product])}}" class="icon_td delete"></a>
+                                        @if($product->type->id == 2)
+                                            <a href="{{route('product.setGood', [$product])}}" title="Одобрить" style="color:green;" class="faLink"><i class="fa fa-check-square-o"></i></a>
+                                            <a href="{{route('product.setNoGood', [$product])}}" title="Отклонить" style="color:red;" class="faLink"><i class="fa fa-times"></i></a>
+                                        @elseif($product->type->id == 3)
+                                            <a href="{{route('product.setNoGood', [$product])}}" title="Отклонить" style="color:red;" class="faLink"><i class="fa fa-times"></i></a>
+                                        @elseif($product->type->id == 4)
+                                            <a href="{{route('product.setGood', [$product])}}" title="Одобрить" style="color:green;" class="faLink"><i class="fa fa-check-square-o"></i></a>
+                                        @endif
+                                        @if($product->status->id == 1 || $product->status->id == 4)
+                                            <a href="{{route('product.setActive', [$product])}}" title="Установить активным" class="faLink"><i class="fa fa-eye"></i></a>
+                                        @elseif($product->status->id == 2 || $product->status->id == 3)
+                                            <a href="{{route('product.setDisActive', [$product])}}" title="Установить неактивным" class="faLink clBlue"><i class="fa fa-eye"></i></a>
+                                        @endif
+                                        <a href="{{route('product.edit', [$product])}}" class="faLink"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('product.delete', [$product])}}" class="faLink"><i class="fa fa-trash"></i></a>
                                     </div>
                                     <div class="tabtd"><a href="{{'manager', [$product->manager]}}">{{$product->manager->name}}</a></div>
                                 </div>

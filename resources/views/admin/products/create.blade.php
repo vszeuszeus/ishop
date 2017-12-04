@@ -12,13 +12,15 @@
 
                 <div class="col-xs-12 col-md-9 col-lg-10">
 
-                    <a href="{{route('productGroup.show', [$productGroup])}}" class="a_back">&lt; Назад к группам товаров</a>
+                    <a href="{{route('productGroup.show', [$productGroup])}}" class="a_back">&lt; Назад к группам
+                        товаров</a>
                     <div class="row">
                         <div class="col-xs-12 col-md-12 col-lg-6">
-                            <div class="titlecontent">Новый товар</div>
-                            <div class="resalt_order">Категория: {{$productGroup->category->name}} | Группа: {{$productGroup->name}}</div>
+                            <div class="titlecontent">Добавление товаров</div>
+                            <div class="resalt_order">Категория: {{$productGroup->category->name}} |
+                                Группа: {{$productGroup->name}}</div>
                         </div>
-                        <div class="col-xs-12 col-md-12 col-lg-6">
+                        {{--<div class="col-xs-12 col-md-12 col-lg-6">
                             <div class="right_s">
                                 <div class="form_label">Изменить статус товара</div>
                                 <!--  <div class="wr_input_c">  -->
@@ -32,12 +34,93 @@
                                 </div>
                                 <!-- </div> -->
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
+                    @php
+                        echo "
+                            <script type='text/javascript'>
+                                window.input_errors = ".$errors.";".
+                                "window.old_input = 0;".
+                            "</script>";
+                    @endphp
 
-                    <form id="formSent" action="{{route('product.store')}}" method="POST">
-                        {{csrf_field()}}
-                        <input type="hidden" name="productGroup_id" value="{{$productGroup->id}}">
+                    <div id="table_create_products" class="wrap_group_input">
+                        <div class="wrap_group_inl">
+                            <div class="form_label lab_size_block">Количество товара:</div>
+                            <div class="block_formitem">
+                                <input v-validate="'numeric|max_value:50|min_value:1|required'" type="text"
+                                       :class="{'input': true, 'is-danger': errors.has('product_counts')}" data-vv-as="'количество товара'" name="product_counts" v-model="product_counts"
+                                       class="input_content">
+                                <span v-show="errors.has('product_counts')" class="help is-danger">@{{ errors.first('product_counts') }}</span>
+                            </div>
+                        </div>
+                        <div class="wrap_group_inl">
+                            <div class="form_label lab_size_block">Действия:</div>
+                            <div class="block_formitem">
+                                <input type="checkbox" class="" v-model="isChecked">
+                                <div class="check_label">Отметить все черновиками</div>
+                            </div>
+                        </div>
+                        <form @submit.prevent="validateBeforeSubmit" action="{{route('product.store')}}" id="formProducts" method="POST" enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            <input type="hidden" name="productGroup_id" value="{{$productGroup->id}}">
+                            <table class="table table-striped" style=" width:90%; padding:10px;">
+                                <template v-for="item in arrProducts">
+                                    <tr style="border-bottom:solid 2px black;">
+                                        <td style=" text-align:center; font-size:3em; color:#e82828; border-right: 2px solid black;">
+                                            @{{ item + 1 }}
+                                        </td>
+                                        <td>
+                                            <div style="margin-left:20px;">
+                                                <div class="wrap_group_input">
+                                                    <div class="form_label lab_size_block">данные товара:</div>
+                                                    <div class="block_formitem">
+                                                        <textarea v-validate="'max:300'"
+                                                                  maxlength="300"
+                                                                  v-bind:name="'descriptions[' + item + ']'" id=""
+                                                                  rows="3" class="textarea_rev  textarea_t2"
+                                                                  placeholder="Введите описание товара: это описание клиент увидит, коглда оплатит товар"></textarea>
+
+                                                    </div>
+                                                </div>
+                                                <div class="block_formitem wr_input_type">
+                                                    <input
+                                                           v-bind:name="'drafts[' + item + ']'" type="checkbox"
+                                                           class="" :checked="isChecked">
+                                                    <div class="check_label">Сохранить как черновик</div>
+                                                </div>
+
+                                                <div>
+                                                    <div class="wrap_group_input">
+                                                        <div class="form_label lab_size_block">фото товара:</div>
+                                                        <div class="block_formitem">
+                                                            <input data-vv-as="'фотографии'" v-validate="'mimes:image/jpeg,image/png,image/jpg|size:5120'"
+                                                                   maxlength="3" multiple max="3"
+                                                                   v-bind:name="'photos[' + item + '][]'" type="file"
+                                                                   class="file"
+                                                                   v-on:change="testCount($event)"
+                                                            >
+                                                            <span v-show="errors.has('photos[' + item + '][]')" class="help is-danger">@{{ errors.first('photos[' + item + '][]') }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </table>
+                            <div class="wrap_group_input">
+                                <div class="block_btn_type2">
+                                    {{--<input type="submit" class="order_btn color_r" onclick="sentForm()"value="Сохранить как черновик"/>--}}
+                                    <input  type="submit" class="order_btn color_w"
+                                           value="Сохранить и отправить на модерацию"/>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    {{--<form id="formSent" action="{{route('product.store')}}" method="POST">
+
                         <input type="hidden" name="type_product_id" id="type_product_id" value="1">
                         @if ($errors->has('photo_path'))
                             <span class="help-block">
@@ -64,21 +147,7 @@
                                 <input type="submit" class="order_btn color_w" value="Сохранить и отправить на модерацию"/>
                             </div>
                         </div>
-                    </form>
-
-                    <script type="text/javascript">
-                        function sentForm() {
-                            var form = document.getElementById('formSent');
-                            var input = document.getElementById('type_product_id');
-                            input.value = 2;
-                            form.submit();
-                        }
-                    </script>
-
-
-
-
-
+                    </form>--}}
 
 
                 </div><!--col-md-9-->

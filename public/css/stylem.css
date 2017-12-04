@@ -1459,9 +1459,9 @@ p {
 }
 .textarea_rev{
 	width: 415px;
-	max-width: 100%;
+	max-width: 90%;
 	border: 1px solid #babdc3;
-	height: 150px;
+	height: 100px;
 	color: #4a4e54;
 	font-size: 12px;
 	font-family: 'DINPro-Light';
@@ -4007,4 +4007,31 @@ input[type="submit"].btn_type14{
 	    color: #fff;
 	}
 }
+.is-danger {
+	border-color:#e82828;
+
+}
+.help {
+	display: block;
+	font-size: 14px;
+	margin-top: 5px;
+	color: #e82828;
+}
+.faLink {
+	color:darkgray;
+	font-size:20px;
+	cursor:pointer;
+	top:3px;
+}
+.faLink:hover {
+	color:darkgray;
+}
+.clBlue{
+	color:#00B8D9;
+}
+.clBlue:hover
+{
+	color:#00B8D9;
+}
+
 

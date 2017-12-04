@@ -49,8 +49,8 @@ $(document).ready(function() {
 
 
    setTimeout(function() {
-    $('.input_check, .select, .file').styler();
-  }, 100)
+    $('.input_check, .select, .file, .checkbox ').styler();
+  }, 100);
 
 
    Mobile();

@@ -51,10 +51,11 @@ Route::group(['middleware' => 'auth'], function(){
             Route::patch('{product}/update','ProductController@update')->name('product.update');
             Route::get('{product}/delete','ProductController@delete')->name('product.delete');
             Route::get('{product}/setActive','ProductController@setActive')->name('product.setActive');
-            Route::get('{product}/disActive','ProductController@disActive')->name('product.setDisActive');
-
-
+            Route::get('{product}/setDisActive','ProductController@ыуеDisActive')->name('product.setDisActive');
+            Route::get('{product}/setGood','ProductController@setGood')->name('product.setGood');
+            Route::get('{product}/setNoGood','ProductController@setNoGood')->name('product.setNoGood');
         });
+
         Route::group(['prefix' => 'categories'], function(){
             Route::get('/{category}/show','CategoryController@show')->name('category.show');
             Route::get('/create','CategoryController@create')->name('category.create');
@@ -77,9 +78,6 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('{productGroup}/disActive','ProductGroupController@disActive')->name('productGroup.setDisActive');
         });
 
-        Route::group(['prefix' => 'products'], function(){
-
-        });
 
         Route::group(['prefix' => 'managers'], function(){
             Route::get('{manager}/show', 'ManagerController@show')->name('manager.show');

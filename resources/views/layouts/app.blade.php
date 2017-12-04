@@ -5,25 +5,21 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>source</title>
     <link rel="shortcut icon" href="{{secure_asset('favicon.ico')}}" type="image/x-icon">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{secure_asset('css/bootstrap-grid.min.css')}}">
     <link rel="stylesheet" href="{{secure_asset('slick/slick.css')}}" type="text/css" media="screen"/>
     <link rel="stylesheet" href="{{secure_asset('slick/slick-theme.css')}}" type="text/css" media="screen"/>
-    <script type="text/javascript" src="{{secure_asset('slick/slick.min.js')}}"></script>
-    <link rel="stylesheet" href="{{secure_asset('js/formstyler/jquery.formstyler.css')}}" type="text/css" media="screen"/>
-    <script type="text/javascript" src="{{secure_asset('js/formstyler/jquery.formstyler.min.js')}}"></script>
-    <script type="text/javascript" src="{{secure_asset('js/raty/jquery.raty.min.js')}}"></script>
-    <script type="text/javascript" src="{{secure_asset('js/jscharts.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{secure_asset('css/stylem.css')}}">
-    <script type="text/javascript" src="{{secure_asset('js/init.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('css/font-awesome.min.css')}}">
     <!--[if IE 9]>
     <link rel="stylesheet" type="text/css" href="{{secure_asset('css/ie9.css')}}">
     <script type="text/javascript" src="{{secure_asset('js/placeholder.js')}}"></script>
     <![endif]-->
     <!-- Styles -->
-    {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+
 </head>
 <body>
 <div id="wrapper">
@@ -145,5 +141,10 @@
         </div><!--footer-->
     </div>
 </div>
+<script src="{{secure_asset('js/app.js')}}" type="text/javascript"></script>
+<script type="text/javascript" src="{{secure_asset('slick/slick.min.js')}}"></script>
+<script type="text/javascript" src="{{secure_asset('js/raty/jquery.raty.min.js')}}"></script>
+<script type="text/javascript" src="{{secure_asset('js/jscharts.js')}}"></script>
+<script type="text/javascript" src="{{secure_asset('js/init.js')}}"></script>
 </body>
 </html>
