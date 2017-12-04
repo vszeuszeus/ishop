@@ -63,7 +63,6 @@
                                     </span>
                                 @endif
                             </div>
-
                         </div>
 
                         <div class="wrap_group_input">
@@ -76,7 +75,6 @@
                                     </span>
                                 @endif
                             </div>
-
                         </div>
 
                         <div class="wrap_group_input">

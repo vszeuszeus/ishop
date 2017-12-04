@@ -81,6 +81,46 @@ class ProductController extends Controller
         ]);
     }
 
+    public function update(Product $product, ProductRequest $request){
+
+        if($request->has('draft') && $request->has('setActive'))
+            return redirect()->back()->withInput()->withErrors(trans('validation.draftAndActive'));
+        $product->load('group');
+        $product->description = $request->description;
+
+        if($request->has('draft'))
+        {
+            $product->product_status_id = 1; //neactiven
+            $product->product_type_id = 1; //chernovik
+        }elseif($request->has('setActive'))
+        {
+            if($product->group->premodaration){
+                return redirect()->back()->withErrors(trans('validation.cant_active_premod_group_no_ready'));
+            }
+            $product->product_status_id = 2; //activen
+            $product->product_type_id = 3; //odobren
+        }elseif($product->group->premodaration)
+        {
+            $product->product_status_id = 1; //neactiven
+            $product->product_type_id = 2; //na proverke
+        }
+        else{
+            $product->product_status_id = 1; //neactiven
+            $product->product_type_id = 3; //odobren
+        }
+
+        foreach($request->photos as $photo):
+            $product->storePhoto($photo);
+            $product->photos()->create([
+                'path' => $product->storePhoto($photo)
+            ]);
+        endforeach;
+
+        return redirect()->route('productGroup.show', [$product->group])
+            ->with('message', trans('products.update', ['value' => $product->id]));
+
+    }
+
     public function delete()
     {
 

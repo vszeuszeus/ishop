@@ -16,7 +16,8 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-12 col-lg-12">
                             <div class="titlecontent">Редактирование товара № {{$product->id}}</div>
-                            <div class="resalt_order">Категория: {{$product->group->category->name}} | Группа: {{$product->group->name}}</div>
+                            <div class="resalt_order">Категория: {{$product->group->category->name}} |
+                                Группа: {{$product->group->name}}</div>
                         </div>
                         {{--<div class="col-xs-12 col-md-12 col-lg-6">
                             <div class="right_s">
@@ -33,35 +34,53 @@
                                 <!-- </div> -->
                             </div>
                         </div>--}}
-                    </div>
 
-                    <form id="formSent" action="{{route('product.store')}}" method="POST">
+                    </div>
+                    @include('common.message')
+                    @include('common.errors')
+                    <form enctype="multipart/form-data" id="formSent" action="{{route('product.update',[$product])}}" method="POST">
                         {{csrf_field()}}
-                        <input type="hidden" name="productGroup_id" value="">
-                        <input type="hidden" name="type_product_id" id="type_product_id" value="1">
-                        @if ($errors->has('photo_path'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('photo_path') }}</strong>
-                                    </span>
-                        @endif
+                        {{method_field('PATCH')}}
                         <div class="wrap_group_input">
                             <div class="form_label lab_size_block">данные товара:</div>
                             <div class="block_formitem">
-                                <textarea name="description" id="" class="textarea_rev  textarea_t2" placeholder="Введите описание товара: это описание клиент увидит, коглда оплатит товар"></textarea>
+                                <textarea name="description" id="" class="textarea_rev  textarea_t2"
+                                          placeholder="Введите описание товара: это описание клиент увидит, когда оплатит товар">{{old('description', $product->description)}}</textarea>
                             </div>
                         </div>
 
                         <div class="wrap_group_input">
                             <div class="form_label lab_size_block">фото товара:</div>
                             <div class="block_formitem">
-                                <input multiple name="photos" type="file" class="file">
+                                <input multiple name="photos[]" type="file" class="file">
                             </div>
                         </div>
-
+                        <div class="wrap_group_input">
+                            <div class="block_formitem wr_input_type">
+                                <input @if(old('draft')) checked="checked" @endif type="checkbox" name="draft" class="input_check input_check_inl" />
+                                <div class="check_label">сохранить как черновик</div>
+                                @if ($errors->has('draft'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('draft') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="wrap_group_input">
+                            <div class="block_formitem wr_input_type">
+                                <input @if(old('setActive')) checked="checked" @endif type="checkbox" name="setActive" class="input_check input_check_inl" />
+                                <div class="check_label">выставить на продажу (Активен)</div>
+                                @if ($errors->has('setActive'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('setActive') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="wrap_group_input">
                             <div class="block_btn_type2">
-                                <input type="submit" class="order_btn color_r" onclick="sentForm()"value="Сохранить как черновик"/>
-                                <input type="submit" class="order_btn color_w" value="Сохранить и отправить на модерацию"/>
+                                <input type="submit" class="order_btn color_w"
+                                       value="Сохранить"/>
                             </div>
                         </div>
                     </form>
@@ -74,11 +93,6 @@
                             form.submit();
                         }
                     </script>
-
-
-
-
-
 
 
                 </div><!--col-md-9-->

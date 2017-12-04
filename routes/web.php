@@ -42,20 +42,6 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 
-        Route::group(['prefix' => 'products'], function(){
-            Route::get('/','CategoryController@index')->name('products');
-            Route::get('{product}/show', 'ProductController@show')->name('product.show');
-            Route::get('create/{productGroup}', 'ProductController@create')->name('product.create');
-            Route::post('store', 'ProductController@store')->name('product.store');
-            Route::get('{product}/edit','ProductController@edit')->name('product.edit');
-            Route::patch('{product}/update','ProductController@update')->name('product.update');
-            Route::get('{product}/delete','ProductController@delete')->name('product.delete');
-            Route::get('{product}/setActive','ProductController@setActive')->name('product.setActive');
-            Route::get('{product}/setDisActive','ProductController@ыуеDisActive')->name('product.setDisActive');
-            Route::get('{product}/setGood','ProductController@setGood')->name('product.setGood');
-            Route::get('{product}/setNoGood','ProductController@setNoGood')->name('product.setNoGood');
-        });
-
         Route::group(['prefix' => 'categories'], function(){
             Route::get('/{category}/show','CategoryController@show')->name('category.show');
             Route::get('/create','CategoryController@create')->name('category.create');
@@ -78,6 +64,19 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('{productGroup}/disActive','ProductGroupController@disActive')->name('productGroup.setDisActive');
         });
 
+        Route::group(['prefix' => 'products'], function(){
+            Route::get('/','CategoryController@index')->name('products');
+            Route::get('{product}/show', 'ProductController@show')->name('product.show');
+            Route::get('create/{productGroup}', 'ProductController@create')->name('product.create');
+            Route::post('store', 'ProductController@store')->name('product.store');
+            Route::get('{product}/edit','ProductController@edit')->name('product.edit');
+            Route::patch('{product}/update','ProductController@update')->name('product.update');
+            Route::get('{product}/delete','ProductController@delete')->name('product.delete');
+            Route::get('{product}/setActive','ProductController@setActive')->name('product.setActive');
+            Route::get('{product}/setDisActive','ProductController@ыуеDisActive')->name('product.setDisActive');
+            Route::get('{product}/setGood','ProductController@setGood')->name('product.setGood');
+            Route::get('{product}/setNoGood','ProductController@setNoGood')->name('product.setNoGood');
+        });
 
         Route::group(['prefix' => 'managers'], function(){
             Route::get('{manager}/show', 'ManagerController@show')->name('manager.show');
