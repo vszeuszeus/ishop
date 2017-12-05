@@ -88,6 +88,7 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
     'draftAndActive'       => 'Невозможно активровать товар указаный как черновик',
+    'cant_load_more_three_photo_because_have' => 'Максимальное количество фотографий для товара - 3, отметьте на удаление фотографии которые нужно заменить',
 
     /*
     |--------------------------------------------------------------------------

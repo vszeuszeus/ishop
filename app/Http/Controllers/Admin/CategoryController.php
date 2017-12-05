@@ -23,11 +23,13 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $category = Category::first();
+        $pagination = ($request->has('pagination')) ? $request->pagination : 10;
         return view('admin.categories.categories',[
             'categories' => Category::all(),
             'category' => $category,
             'groupProducts' => ProductGroup::where('category_id', $category->id)->with('products')
-                ->paginate( ($request->has('paginate')) ? $request->paginate : 10 )
+                ->paginate($pagination),
+            'pagination' => $pagination
         ]);
     }
 
@@ -37,7 +39,8 @@ class CategoryController extends Controller
             'categories' => Category::all(),
             'category' => $category,
             'groupProducts' => ProductGroup::where('category_id', $category->id)->with('products')
-                ->paginate( ($request->has('paginate')) ? $request->paginate : 10 )
+                ->paginate( ($request->has('pagination')) ? $request->pagination : 10 ),
+            'pagination' => $request->pagination
         ]);
     }
 

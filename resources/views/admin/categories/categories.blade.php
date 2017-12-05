@@ -87,33 +87,17 @@
                                 <div class="count_list">
                                     <div class="label_count">Показывать по: </div>
                                     <div class="wrap-select">
-                                        <form method="GET" action="{{route('category.show', $category)}}">
-                                            <select name="pagination" id="" class="select" onchange="submit">
-                                                <option value="">10</option>
-                                                <option value="">20</option>
-                                                <option value="">30</option>
-                                                <option value="">40</option>
+                                        @php $arrayPaginate = [10,20,30,40]; @endphp
+                                        <form id="formSubmitPaginate" method="GET" action="{{route('category.show', $category)}}">
+                                            <select name="pagination" id="paginateSelect" class="select">
+                                                @foreach($arrayPaginate as $pagin)
+                                                    <option @if($pagin == $pagination) selected @endif value="{{$pagin}}">{{$pagin}}</option>
+                                                @endforeach
                                             </select>
                                         </form>
                                     </div>
                                 </div>
-                                <ul class="pagination_ul">
-                                    <li>
-                                        <a href="#" class="active">1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="">2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="">...</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="">7</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="">8</a>
-                                    </li>
-                                </ul>
+                                {{$groupProducts->appends(['pagination' => $pagination])->links()}}
                             </div>
                         </div>
 

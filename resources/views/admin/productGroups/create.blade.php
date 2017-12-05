@@ -215,8 +215,6 @@
                                                 </div>
                                             @endforeach
                                         @endif
-
-
                                     </div>
                                     @if ($errors->has('managers'))
                                         <span class="help-block">
@@ -226,11 +224,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-12 col-lg-5 col-lg-offset-2 col-md-offset-0 block_50_lab">
-
-
                                 <div class="form_label lab_size_block">Разрешения для менеджеров:</div>
-
-
                                 <div class="wrap_block_table table_type">
                                     <div class="table_cont">
                                         <div class="tabrow">

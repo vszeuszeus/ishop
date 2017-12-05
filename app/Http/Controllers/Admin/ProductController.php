@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Photo;
 use Illuminate\Http\Request;
 use App\Product;
 use App\ProductGroup;
@@ -85,6 +86,14 @@ class ProductController extends Controller
 
         if($request->has('draft') && $request->has('setActive'))
             return redirect()->back()->withInput()->withErrors(trans('validation.draftAndActive'));
+
+        $product->load('photos');
+        $countDeletePhoto = count($request->deletePhotos);
+        $countPhotos = count($request->photos);
+        $countHavePhotos = count($product->photos);
+        if( (($countHavePhotos - $countDeletePhoto ) + $countPhotos) > 3)
+            return redirect()->back()->withInput()->withErrors(trans('validation.cant_load_more_three_photo_because_have'));
+
         $product->load('group');
         $product->description = $request->description;
 
@@ -95,7 +104,7 @@ class ProductController extends Controller
         }elseif($request->has('setActive'))
         {
             if($product->group->premodaration){
-                return redirect()->back()->withErrors(trans('validation.cant_active_premod_group_no_ready'));
+                return redirect()->back()->withInput()->withErrors(trans('validation.cant_active_premod_group_no_ready'));
             }
             $product->product_status_id = 2; //activen
             $product->product_type_id = 3; //odobren
@@ -109,20 +118,44 @@ class ProductController extends Controller
             $product->product_type_id = 3; //odobren
         }
 
-        foreach($request->photos as $photo):
-            $product->storePhoto($photo);
-            $product->photos()->create([
-                'path' => $product->storePhoto($photo)
-            ]);
-        endforeach;
+        if(count($request->deletePhotos))
+        {
+            $photosID = array_keys($request->deletePhotos);
+            $photos = Photo::whereIn('id', $photosID)->get();
+            foreach($photos as $item)
+            {
+                $item->deleteByPath();
+            }
+            Photo::destroy($photosID);
+        }
+
+        if(count($request->photos))
+        {
+            foreach($request->photos as $photo):
+                $product->storePhoto($photo);
+                $product->photos()->create([
+                    'path' => $product->storePhoto($photo)
+                ]);
+            endforeach;
+        }
+
+        $product->save();
 
         return redirect()->route('productGroup.show', [$product->group])
             ->with('message', trans('products.update', ['value' => $product->id]));
-
     }
 
-    public function delete()
+    public function delete(Product $product)
     {
+        $photos = $product->photos()->get();
+        foreach($photos as $photo){
+            $photo->deleteByPath();
+            $photo->delete();
+        }
+        $product_id = $product->id;
+        $product->delete();
+        return redirect()->back()
+            ->with('message', trans('products.delete', ['value' => $product_id]));
 
     }
 

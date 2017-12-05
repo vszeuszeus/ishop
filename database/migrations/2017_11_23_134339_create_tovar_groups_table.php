@@ -31,6 +31,9 @@ class CreateTovarGroupsTable extends Migration
             $table->string('h1', 255)->unique();
             $table->boolean('active');
             $table->integer('is_visible_price');
+            $table->integer('is_visible_photo');
+            $table->integer('is_visible_description');
+            $table->integer('is_visible_tags');
             $table->integer('is_change_price');
             $table->integer('is_change_photo');
             $table->integer('is_change_description');

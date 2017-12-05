@@ -35,7 +35,7 @@ class ProductGroupRequest extends FormRequest
             'price' => 'required|integer|max:2000000',
             'manager_pay' => 'numeric|required',
             'manager_pay_type_id' => 'required|exists:manager_pay_types,id',
-            'description'=>'string|max:2000|min:500|nullable',
+            'description'=>'string|max:2000|min:500|required',
             'url'=>'string|max:255|unique:product_groups,url,'.$productGroupId.',id|nullable',
             'header_description'=>'string|max:255|nullable',
             'keywords'=>'string|max:255|nullable',

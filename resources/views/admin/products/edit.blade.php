@@ -35,7 +35,7 @@
                             </div>
                         </div>--}}
 
-                    </div>
+                    </div><br><br>
                     @include('common.message')
                     @include('common.errors')
                     <form enctype="multipart/form-data" id="formSent" action="{{route('product.update',[$product])}}" method="POST">
@@ -46,14 +46,36 @@
                             <div class="block_formitem">
                                 <textarea name="description" id="" class="textarea_rev  textarea_t2"
                                           placeholder="Введите описание товара: это описание клиент увидит, когда оплатит товар">{{old('description', $product->description)}}</textarea>
+                                @if ($errors->has('description'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-
                         <div class="wrap_group_input">
                             <div class="form_label lab_size_block">фото товара:</div>
+                            @php
+                                $oldDeletePhotos = old('deletePhotos', []);
+                            @endphp
+                            @foreach($product->photos as $photo)
+                                @php
+                                    $checkToDelete = false;
+                                @endphp
+                                <div class="wrap_group_inl wr_input_type">
+                                    <img style="height:100px;" src="{{secure_asset($photo->path)}}" title="{{trans('photos.photoTitle', ['value' => $loop->iteration])}}">
+                                    @php
+                                        foreach($oldDeletePhotos as $key=>$oldDel):
+                                             if($key == $photo->id) $checkToDelete = true;
+                                        endforeach;
+                                    @endphp
+                                    <input name="deletePhotos[{{$photo->id}}]" @if($checkToDelete) checked="checked" @endif type="checkbox" class="input_check input_check_inl"> Отметить на удаление
+                                </div>
+                            @endforeach
                             <div class="block_formitem">
                                 <input multiple name="photos[]" type="file" class="file">
                             </div>
+
                         </div>
                         <div class="wrap_group_input">
                             <div class="block_formitem wr_input_type">
@@ -84,15 +106,6 @@
                             </div>
                         </div>
                     </form>
-
-                    <script type="text/javascript">
-                        function sentForm() {
-                            var form = document.getElementById('formSent');
-                            var input = document.getElementById('type_product_id');
-                            input.value = 2;
-                            form.submit();
-                        }
-                    </script>
 
 
                 </div><!--col-md-9-->

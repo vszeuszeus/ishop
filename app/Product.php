@@ -39,17 +39,9 @@ class Product extends Model
         return 'storage/'.substr($file->store('public/upload/products/'.$this->id), 7);
     }
 
-    public function restorePhotoPath($file)
+    public function deletePhoto($id)
     {
         Storage::delete('public'.substr($this->photo_path, 7));
-        $save_path = 'storage/'.substr($file->store('public/upload/categories'), 7);
-        $this->photo_path = $save_path;
-        $this->save();
-        return $save_path;
-    }
 
-    public function deletePhotoPath()
-    {
-        Storage::delete('public'.substr($this->photo_path, 7));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Requests\ProductGroupRequest;
 use App\ManagerPayType;
+use App\Product;
 use App\ProductGroup;
 use Illuminate\Http\Request;
 use App\User;
@@ -20,10 +21,14 @@ class ProductGroupController extends Controller
         $this->productGroup = $productGroup;
     }
 
-    public function show(ProductGroup $productGroup)
+    public function show(ProductGroup $productGroup, Request $request)
     {
+        $pagination = ($request->has('pagination')) ? $request->pagination : 10;
+        $products = Product::where('product_group_id', $productGroup->id)->with('manager', 'type', 'status')->paginate($pagination);
         return view('admin.productGroups.show', [
-            'productGroup' => $productGroup->load('category', 'products.manager', 'products.type', 'products.status')
+            'productGroup' => $productGroup->load('category'),
+            'products' => $products,
+            'pagination' => $pagination
         ]);
     }
 
@@ -58,6 +63,9 @@ class ProductGroupController extends Controller
             'photo_alt' => $request->setBaseIfEmpty('photo_alt','name'),
             'active' => ($request->has('active') ? 1 : 0),
             'is_visible_price' => ($request->has('is_visible_price') ? 1 : 0),
+            'is_visible_photo' => ($request->has('is_visible_photo') ? 1 : 0),
+            'is_visible_description' => ($request->has('is_visible_description') ? 1 : 0),
+            'is_visible_tags' => ($request->has('is_visible_tags') ? 1 : 0),
             'is_change_price' => ($request->has('is_change_price') ? 1 : 0),
             'is_change_photo' => ($request->has('is_change_photo') ? 1 : 0),
             'is_change_description' => ($request->has('is_change_description') ? 1 : 0),
@@ -116,6 +124,9 @@ class ProductGroupController extends Controller
         $productGroup->photo_alt = $request->setBaseIfEmpty('photo_alt', 'name');
         $productGroup->active = ($request->has('photo_alt') ?  : 0);
         $productGroup->is_visible_price = ($request->has('is_visible_price') ? 1 : 0);
+        $productGroup->is_visible_photo = ($request->has('is_visible_photo') ? 1 : 0);
+        $productGroup->is_visible_description = ($request->has('is_visible_description') ? 1 : 0);
+        $productGroup->is_visible_tags = ($request->has('is_visible_tags') ? 1 : 0);
         $productGroup->is_change_price = ($request->has('is_change_price') ? 1 : 0);
         $productGroup->is_change_photo = ($request->has('is_change_photo') ? 1 : 0);
         $productGroup->is_change_description = ($request->has('is_change_description') ? 1 : 0);
